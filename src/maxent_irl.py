@@ -46,7 +46,13 @@ def compute_expected_svf(env, theta, horizon, start_dist):
                 mu_next[env.transitions[s, a]] += mu[s] * policy[s, a]
         mu = mu_next
         svf += mu
-    return svf
+    # svf currently sums to `horizon` (one full probability mass added per
+    # timestep). Normalise to per-step-average visitation frequency so it's
+    # on the same scale as demo_feature_counts (empirical_feature_counts
+    # divides by total state-visits, i.e. also a per-step average) -- the
+    # gradient demo_fc - exp_fc is only meaningful if both sides use the
+    # same convention.
+    return svf / horizon
 
 
 def _softmax_rows(Q):
