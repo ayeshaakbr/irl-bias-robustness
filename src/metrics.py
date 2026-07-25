@@ -42,6 +42,20 @@ def policy_value_under_true(env, policy, horizon, start_dist):
     return value
 
 
+def _worst_case_policy(env):
+    """Policy minimising true value: value iteration on the NEGATED true reward."""
+    worst_env_rewards = -env.true_rewards
+    V = np.zeros(env.n_states)
+    for _ in range(2000):
+        Q = worst_env_rewards[:, None] + env.gamma * V[env.transitions]
+        V_new = Q.max(axis=1)
+        if np.max(np.abs(V_new - V)) < 1e-8:
+            V = V_new; break
+        V = V_new
+    Q = worst_env_rewards[:, None] + env.gamma * V[env.transitions]
+    return Q.argmax(axis=1)
+
+
 def value_regret(env, recovered_policy, horizon, start_dist, normalise=True):
     """
     Normalised value regret of a recovered policy. 0 = optimal, higher = worse.
@@ -54,21 +68,71 @@ def value_regret(env, recovered_policy, horizon, start_dist, normalise=True):
     if not normalise:
         return raw_regret
 
-    # Worst-case value for normalisation: policy that minimises true value.
-    # Compute via value iteration on the NEGATED true reward.
-    worst_env_rewards = -env.true_rewards
-    V = np.zeros(env.n_states)
-    for _ in range(2000):
-        Q = worst_env_rewards[:, None] + env.gamma * V[env.transitions]
-        V_new = Q.max(axis=1)
-        if np.max(np.abs(V_new - V)) < 1e-8:
-            V = V_new; break
-        V = V_new
-    Q = worst_env_rewards[:, None] + env.gamma * V[env.transitions]
-    pi_worst = Q.argmax(axis=1)
+    pi_worst = _worst_case_policy(env)
     v_worst = policy_value_under_true(env, pi_worst, horizon, start_dist)
 
     denom = v_star - v_worst
     if abs(denom) < 1e-9:
         return 0.0                                 # degenerate: all policies equal
+    return raw_regret / denom
+
+
+def stochastic_policy_value_under_true(env, policy_probs, horizon, start_dist):
+    """
+    Generalisation of policy_value_under_true to a STOCHASTIC policy, given
+    as policy_probs[s, a] = P(a|s). A deterministic policy is the special
+    case where every row is one-hot -- this exists because some
+    demonstrators (Boltzmann) are stochastic themselves, and we sometimes
+    need the value of the DEMONSTRATOR's own behaviour, not just of a
+    recovered policy (see stochastic_value_regret).
+    """
+    mu = start_dist.copy()
+    value = 0.0
+    discount = 1.0
+    n_states, n_actions = policy_probs.shape
+    for _ in range(horizon):
+        value += discount * (mu @ env.true_rewards)
+        mu_next = np.zeros(env.n_states)
+        for s in range(n_states):
+            if mu[s] < 1e-12:
+                continue
+            for a in range(n_actions):
+                p = policy_probs[s, a]
+                if p < 1e-12:
+                    continue
+                mu_next[env.transitions[s, a]] += mu[s] * p
+        mu = mu_next
+        discount *= env.gamma
+    return value
+
+
+def stochastic_value_regret(env, policy_probs, horizon, start_dist, normalise=True):
+    """
+    Value regret of a STOCHASTIC policy (e.g. a Boltzmann demonstrator's
+    OWN behaviour), on the same normalised scale as value_regret.
+
+    Why this exists: bias severity needs to be comparable ACROSS bias
+    models (Boltzmann beta vs. myopia gamma_demo) that aren't comparable as
+    raw parameters -- beta=0.5 and gamma_demo=0.5 mean nothing next to each
+    other. The common currency is "how much true value does a demonstrator
+    following this bias actually lose", i.e. value regret of the
+    demonstrator's OWN policy, computed the same way regardless of which
+    bias model produced it. Myopia's demonstrator is deterministic, so its
+    severity is just value_regret() of its policy directly; Boltzmann's
+    demonstrator is stochastic, so it needs this generalisation.
+    """
+    _, _, pi_star = env.value_iteration()
+    v_star = policy_value_under_true(env, pi_star, horizon, start_dist)
+    v_demo = stochastic_policy_value_under_true(env, policy_probs, horizon, start_dist)
+
+    raw_regret = v_star - v_demo
+    if not normalise:
+        return raw_regret
+
+    pi_worst = _worst_case_policy(env)
+    v_worst = policy_value_under_true(env, pi_worst, horizon, start_dist)
+
+    denom = v_star - v_worst
+    if abs(denom) < 1e-9:
+        return 0.0
     return raw_regret / denom
