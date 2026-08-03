@@ -43,6 +43,72 @@ experiments/sanity_check_myopia.py rather than assumed.
 import numpy as np
 
 
+def finite_horizon_policy_probs(env, planning_horizon, gamma=None, tol=1e-9):
+    """
+    Stochastic finite-horizon policy: pi(a|s) = uniform over the actions
+    that ACTUALLY tie for Q(s,.) under the truncated (value-assumed-0-beyond-
+    horizon) backup; one-hot when there is a unique best action.
+
+    Why this exists (bug found during AL well-posedness diagnosis): the
+    original deterministic finite_horizon_policy used Q.argmax(axis=1),
+    which silently picks the FIRST action index on a tie. Because reward(s)
+    is action-invariant here, EVERY state beyond the horizon has Q(s,a)
+    EXACTLY equal across all four actions (provably -- the goal signal
+    cannot propagate past H hops in H backup rounds, so every successor's
+    truncated value is 0, for every action, at every such state). argmax
+    therefore picked action 0 (UP) at EVERY beyond-horizon state, regardless
+    of position -- including states where UP walks into a wall. That is not
+    a "myopic" choice, it is an indexing artifact: verified directly
+    (see experiments/diagnose_al_wellposedness.py) that this deterministic
+    policy is NOT achievable as the best response to ANY state-indexed
+    reward (an LP feasibility check, Ng & Russell style), i.e. it isn't
+    even a coherent policy for this MDP's restricted (state-only) reward
+    class, let alone a meaningful bias mechanism.
+
+    Fix: beyond-horizon states are genuinely INDIFFERENT under the
+    truncated objective -- the honest way to represent indifference is a
+    uniform mixture over the tied actions, not an arbitrary deterministic
+    pick. This does mean the myopia demonstrator is no longer purely
+    deterministic (it's deterministic within the visibility radius,
+    uniform-random beyond it) -- a real change to the bias model's
+    character, not a cosmetic patch. See
+    experiments/myopia_tiebreak_finding.md for the full writeup of why
+    this doesn't restore "myopia = best-response vertex" (it doesn't --
+    genuine indifference-handling reintroduces mixing for the same reason
+    Boltzmann bias does) but does fix the spatial-incoherence bug.
+    """
+    if gamma is None:
+        gamma = env.gamma
+    n_states, n_actions = env.transitions.shape
+    V = np.zeros(n_states)
+    for _ in range(planning_horizon):
+        Q = env.true_rewards[:, None] + gamma * V[env.transitions]
+        V = Q.max(axis=1)
+    Q = env.true_rewards[:, None] + gamma * V[env.transitions]
+    q_max = Q.max(axis=1, keepdims=True)
+    is_best = np.abs(Q - q_max) < tol
+    probs = is_best / is_best.sum(axis=1, keepdims=True)
+    return probs
+
+
+def generate_trajectories_stochastic(env, policy_probs, start_states, horizon, rng):
+    """Roll out the (possibly tie-mixed) finite-horizon policy, sampling
+    actions at each visit the way boltzmann.generate_trajectories does --
+    same rationale: argmax over probs would silently collapse ties back to
+    the old deterministic-first-index behavior."""
+    n_actions = policy_probs.shape[1]
+    trajs = []
+    for s0 in start_states:
+        s = s0
+        traj = [s]
+        for _ in range(horizon - 1):
+            a = rng.choice(n_actions, p=policy_probs[s])
+            s = env.transitions[s, a]
+            traj.append(s)
+        trajs.append(traj)
+    return trajs
+
+
 def finite_horizon_policy(env, planning_horizon, gamma=None):
     """
     Deterministic policy of an agent that only plans `planning_horizon`
@@ -58,6 +124,14 @@ def finite_horizon_policy(env, planning_horizon, gamma=None):
     progressively reveal more of the grid; once planning_horizon covers the
     grid's diameter, every state can see the goal and this converges to the
     fully-optimal policy.
+
+    NOT the demonstrator generator (see finite_horizon_policy_probs /
+    generate_trajectories_stochastic for that) -- this deterministic,
+    argmax-tie-broken version is kept only because the H-sweep
+    disagreement-count smoothness check (experiments/sanity_check_myopia.py)
+    doesn't depend on WHICH tied action gets picked, only on whether a
+    state disagrees with true-optimal at all. Using this for actual
+    demonstrations reintroduces the fixed tie-break artifact.
     """
     if gamma is None:
         gamma = env.gamma

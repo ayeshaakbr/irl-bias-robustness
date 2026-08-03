@@ -1,0 +1,322 @@
+[
+  {
+    "seed": 0,
+    "regret": 0.924,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.6849,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 1,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0053,
+    "dist_to_recovered_policy_fe": 0.6956,
+    "dist_to_true_demonstrator_fe": 0.0053,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 2,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0057,
+    "dist_to_recovered_policy_fe": 0.6932,
+    "dist_to_true_demonstrator_fe": 0.0057,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 3,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0047,
+    "dist_to_recovered_policy_fe": 0.6957,
+    "dist_to_true_demonstrator_fe": 0.0047,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 4,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.6947,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 5,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0062,
+    "dist_to_recovered_policy_fe": 0.6977,
+    "dist_to_true_demonstrator_fe": 0.0062,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 6,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0046,
+    "dist_to_recovered_policy_fe": 0.6958,
+    "dist_to_true_demonstrator_fe": 0.0046,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 7,
+    "regret": 0.484,
+    "dev_from_analytic_truth": 0.0071,
+    "dist_to_recovered_policy_fe": 0.5425,
+    "dist_to_true_demonstrator_fe": 0.0071,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 8,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0053,
+    "dist_to_recovered_policy_fe": 0.6962,
+    "dist_to_true_demonstrator_fe": 0.0053,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 9,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0037,
+    "dist_to_recovered_policy_fe": 0.695,
+    "dist_to_true_demonstrator_fe": 0.0037,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 10,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0038,
+    "dist_to_recovered_policy_fe": 0.695,
+    "dist_to_true_demonstrator_fe": 0.0038,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 11,
+    "regret": 0.67,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.5842,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 12,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.6943,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 13,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0046,
+    "dist_to_recovered_policy_fe": 0.6928,
+    "dist_to_true_demonstrator_fe": 0.0046,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 14,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0042,
+    "dist_to_recovered_policy_fe": 0.6938,
+    "dist_to_true_demonstrator_fe": 0.0042,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 15,
+    "regret": 0.946,
+    "dev_from_analytic_truth": 0.0048,
+    "dist_to_recovered_policy_fe": 0.7138,
+    "dist_to_true_demonstrator_fe": 0.0048,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 16,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0053,
+    "dist_to_recovered_policy_fe": 0.6952,
+    "dist_to_true_demonstrator_fe": 0.0053,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 17,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0046,
+    "dist_to_recovered_policy_fe": 0.6946,
+    "dist_to_true_demonstrator_fe": 0.0046,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 18,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0056,
+    "dist_to_recovered_policy_fe": 0.6915,
+    "dist_to_true_demonstrator_fe": 0.0056,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 19,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0037,
+    "dist_to_recovered_policy_fe": 0.6933,
+    "dist_to_true_demonstrator_fe": 0.0037,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 20,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0043,
+    "dist_to_recovered_policy_fe": 0.6935,
+    "dist_to_true_demonstrator_fe": 0.0043,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 21,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0044,
+    "dist_to_recovered_policy_fe": 0.6955,
+    "dist_to_true_demonstrator_fe": 0.0044,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 22,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0032,
+    "dist_to_recovered_policy_fe": 0.6938,
+    "dist_to_true_demonstrator_fe": 0.0032,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 23,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0035,
+    "dist_to_recovered_policy_fe": 0.6942,
+    "dist_to_true_demonstrator_fe": 0.0035,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 24,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0044,
+    "dist_to_recovered_policy_fe": 0.6936,
+    "dist_to_true_demonstrator_fe": 0.0044,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 25,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0039,
+    "dist_to_recovered_policy_fe": 0.6956,
+    "dist_to_true_demonstrator_fe": 0.0039,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 26,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0053,
+    "dist_to_recovered_policy_fe": 0.6937,
+    "dist_to_true_demonstrator_fe": 0.0053,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 27,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.6948,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 28,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0034,
+    "dist_to_recovered_policy_fe": 0.6957,
+    "dist_to_true_demonstrator_fe": 0.0034,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 29,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0049,
+    "dist_to_recovered_policy_fe": 0.6951,
+    "dist_to_true_demonstrator_fe": 0.0049,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 30,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0042,
+    "dist_to_recovered_policy_fe": 0.6972,
+    "dist_to_true_demonstrator_fe": 0.0042,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 31,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.004,
+    "dist_to_recovered_policy_fe": 0.6965,
+    "dist_to_true_demonstrator_fe": 0.004,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 32,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0045,
+    "dist_to_recovered_policy_fe": 0.6945,
+    "dist_to_true_demonstrator_fe": 0.0045,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 33,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0059,
+    "dist_to_recovered_policy_fe": 0.6923,
+    "dist_to_true_demonstrator_fe": 0.0059,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 34,
+    "regret": 0.933,
+    "dev_from_analytic_truth": 0.0043,
+    "dist_to_recovered_policy_fe": 0.695,
+    "dist_to_true_demonstrator_fe": 0.0043,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 35,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0063,
+    "dist_to_recovered_policy_fe": 0.6904,
+    "dist_to_true_demonstrator_fe": 0.0063,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 36,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0042,
+    "dist_to_recovered_policy_fe": 0.6924,
+    "dist_to_true_demonstrator_fe": 0.0042,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 37,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0041,
+    "dist_to_recovered_policy_fe": 0.6964,
+    "dist_to_true_demonstrator_fe": 0.0041,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 38,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0049,
+    "dist_to_recovered_policy_fe": 0.6939,
+    "dist_to_true_demonstrator_fe": 0.0049,
+    "closer_to_recovered_than_truth": "False"
+  },
+  {
+    "seed": 39,
+    "regret": 0.0,
+    "dev_from_analytic_truth": 0.0049,
+    "dist_to_recovered_policy_fe": 0.6922,
+    "dist_to_true_demonstrator_fe": 0.0049,
+    "closer_to_recovered_than_truth": "False"
+  }
+]
